@@ -1,12 +1,13 @@
 {
   "schemaVersion": 1,
-  "id": "modid",
+  "id": "vorpal-enchantment",
   "version": "${version}",
 
-  "name": "Example Mod",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "name": "Vorpal Enchantment",
+  "description": "A mod that adds an enchantment that makes it easier to obtain mob heads",
   "authors": [
-    "Me!"
+    "Yumatan",
+    "OverlordsIII"
   ],
   "contact": {
     "homepage": "https://fabricmc.net/",
@@ -14,25 +15,25 @@
   },
 
   "license": "CC0-1.0",
-  "icon": "assets/modid/icon.png",
+  "icon": "assets/vorpal-enchantment/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.fabricmc.example.ExampleMod"
+      "io.github.overlordsiii.VorpalEnchantmentMod"
+    ],
+    "modmenu": [
+      "io.github.overlordsiii.integration.ModMenuIntegration"
     ]
   },
   "mixins": [
-    "modid.mixins.json"
+    "vorpal.mixins.json"
   ],
 
   "depends": {
     "fabricloader": ">=0.11.3",
     "fabric": "*",
-    "minecraft": "1.17.x",
-    "java": ">=16"
-  },
-  "suggests": {
-    "another-mod": "*"
+    "minecraft": "1.18.x",
+    "java": ">=17"
   }
 }
