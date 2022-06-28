@@ -4,5 +4,7 @@
   "text.autoconfig.vorpal_enchantment.option.chances": "Head Drop Mode",
   "text.autoconfig.vorpal_enchantment.option.axeWielding": "Axe Enchanting",
   "text.autoconfig.vorpal_enchantment.option.chances.@Tooltip": "Chooses the chances for head drop per enchantment level. VANILLA_FRIENDLY has values 5%, 10%, 15%. SLIGHTLY_OP has values 5%, 15%, 25%. VERY_OP has 25%, 50%, 75%",
-  "text.autoconfig.vorpal_enchantment.option.axeWielding.@Tooltip": "Allows for axes to be enchanted with this enchantment"
+  "text.autoconfig.vorpal_enchantment.option.axeWielding.@Tooltip": "Allows for axes to be enchanted with this enchantment",
+  "text.autoconfig.vorpal_enchantment.option.worksWithLooting": "Works with Looting, Fortune, and Silk Touch",
+  "ext.autoconfig.vorpal_enchantment.option.worksWithLooting.@Tooltip": "Enables Vorpal to be applied to weapons with fortune, looting, or silk touch"
 }

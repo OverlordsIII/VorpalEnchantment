@@ -16,4 +16,8 @@ public class VorpalConfig implements ConfigData {
 	@ConfigEntry.Gui.Tooltip
 	@Comment("Allows for axes to be enchanted with this enchantment")
 	public boolean axeWielding = true;
+
+	@ConfigEntry.Gui.Tooltip
+	@Comment("Allows Vorpal to be used with looting, fortune, and silk-touch")
+	public boolean worksWithLooting = false;
 }

@@ -4,6 +4,7 @@
   "package": "io.github.overlordsiii.mixin",
   "compatibilityLevel": "JAVA_16",
   "mixins": [
+    "HorseEntityInvoker"
   ],
   "client": [
   ],
