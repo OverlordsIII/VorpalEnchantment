@@ -6,5 +6,20 @@
   "text.autoconfig.vorpal_enchantment.option.chances.@Tooltip": "Chooses the chances for head drop per enchantment level. VANILLA_FRIENDLY has values 5%, 10%, 15%. SLIGHTLY_OP has values 5%, 15%, 25%. VERY_OP has 25%, 50%, 75%",
   "text.autoconfig.vorpal_enchantment.option.axeWielding.@Tooltip": "Allows for axes to be enchanted with this enchantment",
   "text.autoconfig.vorpal_enchantment.option.worksWithLooting": "Works with Looting, Fortune, and Silk Touch",
-  "ext.autoconfig.vorpal_enchantment.option.worksWithLooting.@Tooltip": "Enables Vorpal to be applied to weapons with fortune, looting, or silk touch"
+  "text.autoconfig.vorpal_enchantment.option.worksWithLooting.@Tooltip": "Enables Vorpal to be applied to weapons with fortune, looting, or silk touch",
+  "commands.head.drop.chance": "Set chance for head drop to %s",
+  "commands.error": "Exception Thrown! Exception: %s",
+  "commands.axeWielding.toggle": "Axe Wielding was toggled %s",
+  "commands.worksWithLooting.toggle": "Works with looting was toggled %s",
+  "commands.setChance": "Head drop chance has now been set to %s",
+  "commands.head.drop.op": "Head drop chance has now been set to %s by %d",
+  "commands.suggest.toggle": "Run the %s command",
+  "commands.toggle.op": "The %s option has been toggled %d by %s",
+  "commands.help.axes": "--------Vorpal Enchant Commands--------\n/vorpal-enchantment toggle axeWielding: Toggles if the Vorpal Enchant can be applied to axes (Current Value: %s)\n",
+  "commands.help.looting": "/vorpal-enchantment toggle worksWithLooting: Toggles if Vorpal Enchant can be applied to weapons that have looting, silk touch, or fortune (Current Value: %s)\n",
+  "commands.help.chance": "/vorpal-enchantment setChance [chanceType]: Sets the chances that a head may drop depending on the enchantment level\n",
+  "commands.help.chance.very_op": "VERY_OP means a head will drop 25%, 50%, and 75% for levels 1, 2, and 3\n",
+  "commands.help.chance.slightly_op": "SLIGHTLY_OP means a head will drop 5%, 15%, and 25% for levels 1, 2, and 3\n",
+  "commands.help.chance.vanilla_friendly": "VANILLA_FRIENDLY means a heal will drop 5%, 10%, and 15% for levels 1, 2, and 3\n",
+  "commands.help.chance.current": "Current Value: %s \n---------------------------------------"
 }

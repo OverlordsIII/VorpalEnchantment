@@ -4,6 +4,7 @@ import com.google.common.base.Throwables;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import io.github.overlordsiii.VorpalEnchantment;
 import io.github.overlordsiii.VorpalEnchantmentMod;
 import io.github.overlordsiii.command.argument.ChancesArgumentType;
 import io.github.overlordsiii.command.suggestion.ChancesSuggestionProvider;
@@ -26,28 +27,41 @@ public class VorpalEnchantmentCommand {
 		dispatcher.register(literal("vorpal-enchantment")
 			.then(literal("toggle")
 				.then(literal("axeWielding")
-					.executes(context -> executeToggle(context, "axeWielding", "Axe wielding was toggled %s")))
+					.executes(context -> executeToggle(context, "axeWielding", "commands.axeWielding.toggle")))
 				.then(literal("worksWithLooting")
-					.executes(context -> executeToggle(context, "worksWithLooting", "worksWithLooting was toggled %s"))))
+					.executes(context -> executeToggle(context, "worksWithLooting", "commands.worksWithLooting.toggle"))))
 			.then(literal("setChance")
 				.then(argument("chanceType", ChancesArgumentType.chances())
 					.suggests(new ChancesSuggestionProvider())
-						.executes(context -> executeSetChance(context, ChancesArgumentType.getChance("chanceType", context), "Head drop chance has now been set to %s")))));
+						.executes(context -> executeSetChance(context, ChancesArgumentType.getChance("chanceType", context), "commands.setChance"))))
+			.then(literal("help")
+				.executes(VorpalEnchantmentCommand::executeHelp)));
+	}
+
+	private static int executeHelp(CommandContext<ServerCommandSource> ctx) {
+		ctx.getSource().sendFeedback(Text.translatable("commands.help.axes", VorpalEnchantmentMod.CONFIG.axeWielding).formatted(Formatting.GREEN), false);
+		ctx.getSource().sendFeedback(Text.translatable("commands.help.looting", VorpalEnchantmentMod.CONFIG.worksWithLooting).formatted(Formatting.GREEN), false);
+		ctx.getSource().sendFeedback(Text.translatable("commands.help.chance").formatted(Formatting.GREEN), false);
+		ctx.getSource().sendFeedback(Text.translatable("commands.help.chance.very_op").formatted(Formatting.GREEN), false);
+		ctx.getSource().sendFeedback(Text.translatable("commands.help.chance.slightly_op").formatted(Formatting.GREEN), false);
+		ctx.getSource().sendFeedback(Text.translatable("commands.help.chance.vanilla_friendly").formatted(Formatting.GREEN), false);
+		ctx.getSource().sendFeedback(Text.translatable("commands.help.chance.current", VorpalEnchantmentMod.CONFIG.chances.toString()).formatted(Formatting.GREEN), false);
+
+		return 1;
 	}
 
 	private static int executeSetChance(CommandContext<ServerCommandSource> ctx, Chances chance, String displayText) {
-		String text = String.format(displayText, chance.toString());
 		ctx.getSource().sendFeedback(
-			Text.literal(text).formatted(Formatting.YELLOW)
+			Text.translatable(displayText, chance.toString()).formatted(Formatting.YELLOW)
 				.styled(style -> style.withClickEvent(
 					new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND
 						, "/vorpal-enchantment setChacne " + chance))
 					.withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT
-						, Text.literal("Set chance for head drop to " + chance)))), true);
+						, Text.translatable("commands.head.drop.chance", chance)))), true);
 
 		VorpalEnchantmentMod.CONFIG.chances = chance;
 		VorpalEnchantmentMod.CONFIG_MANAGER.save();
-		Text opText = Text.literal("Head drop chance has now been set to " + chance +  "\" by " + (ctx.getSource().getPlayer() == null ? "Server command terminal" : ctx.getSource().getPlayer().getName().getString())).formatted(Formatting.LIGHT_PURPLE);
+		Text opText = Text.translatable("commands.head.drop.op", chance, (ctx.getSource().getPlayer() == null ? "Server command terminal" : ctx.getSource().getPlayer().getName().getString())).formatted(Formatting.LIGHT_PURPLE);
 		sendToOps(ctx, opText);
 
 		return 1;
@@ -65,16 +79,15 @@ public class VorpalEnchantmentCommand {
 			return -1;
 		}
 		//      System.out.println("onOrOff = " + onOrOff);
-		String text = String.format(displayText, onOrOff);
 		ctx.getSource().sendFeedback(
-			Text.literal(text).formatted(Formatting.YELLOW)
+			Text.translatable(displayText, onOrOff).formatted(Formatting.YELLOW)
 				.styled(style -> style.withClickEvent(
 					new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND
 						, "/vorpal-enchantment toggle " + literal))
 					.withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT
-						, Text.literal("Toggle the " + literal + " option")))), true);
+						, Text.translatable("commands.suggest.toggle", literal)))), true);
 		VorpalEnchantmentMod.CONFIG_MANAGER.save();
-		Text opText = Text.literal("The " + literal + " option has been toggled \"" + onOrOff + "\" by " + (ctx.getSource().getPlayer() == null ? "Server command terminal" : ctx.getSource().getPlayer().getName().getString())).formatted(Formatting.LIGHT_PURPLE);
+		Text opText = Text.translatable("commands.toggle.op", literal, onOrOff, (ctx.getSource().getPlayer() == null ? "Server command terminal" : ctx.getSource().getPlayer().getName().getString())).formatted(Formatting.LIGHT_PURPLE);
 		sendToOps(ctx, opText);
 		return 1;
 	}
@@ -85,7 +98,7 @@ public class VorpalEnchantmentCommand {
 
 	private static void logError(CommandContext<ServerCommandSource> ctx, Exception e) {
 		if (ctx.getSource().getPlayer() != null) {
-			ctx.getSource().getPlayer().sendMessage(Text.literal("Exception Thrown! Exception: " + Throwables.getRootCause(e)), false);
+			ctx.getSource().getPlayer().sendMessage(Text.translatable("commands.error", Throwables.getRootCause(e)), false);
 		}
 		e.printStackTrace();
 	}
