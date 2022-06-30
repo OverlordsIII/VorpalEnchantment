@@ -1,5 +1,5 @@
 {
-  "enchantment.vorpal_enchantment.vorpal_enchantment": "Vorpal Enchantment",
+  "enchantment.vorpal_enchantment.vorpal_enchantment": "Vorpal",
   "text.autoconfig.vorpal_enchantment.title": "Vorpal Enchantment Config",
   "text.autoconfig.vorpal_enchantment.option.chances": "Head Drop Mode",
   "text.autoconfig.vorpal_enchantment.option.axeWielding": "Axe Enchanting",
@@ -15,8 +15,8 @@
   "commands.head.drop.op": "Head drop chance has now been set to %s by %d",
   "commands.suggest.toggle": "Run the %s command",
   "commands.toggle.op": "The %s option has been toggled %d by %s",
-  "commands.help.axes": "--------Vorpal Enchant Commands--------\n/vorpal-enchantment toggle axeWielding: Toggles if the Vorpal Enchant can be applied to axes (Current Value: %s)\n",
-  "commands.help.looting": "/vorpal-enchantment toggle worksWithLooting: Toggles if Vorpal Enchant can be applied to weapons that have looting, silk touch, or fortune (Current Value: %s)\n",
+  "commands.help.axes": "--------Vorpal Enchantment Commands--------\n/vorpal-enchantment toggle axeWielding: Toggles if the Vorpal can be applied to axes (Current Value: %s)\n",
+  "commands.help.looting": "/vorpal-enchantment toggle worksWithLooting: Toggles if Vorpal can be applied to weapons that have looting, silk touch, or fortune (Current Value: %s)\n",
   "commands.help.chance": "/vorpal-enchantment setChance [chanceType]: Sets the chances that a head may drop depending on the enchantment level\n",
   "commands.help.chance.very_op": "VERY_OP means a head will drop 25%, 50%, and 75% for levels 1, 2, and 3\n",
   "commands.help.chance.slightly_op": "SLIGHTLY_OP means a head will drop 5%, 15%, and 25% for levels 1, 2, and 3\n",
