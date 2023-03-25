@@ -2,6 +2,7 @@ package io.github.overlordsiii;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.rmi.registry.Registry;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -53,10 +54,10 @@ import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtString;
 import net.minecraft.nbt.StringNbtReader;
+import net.minecraft.registry.Registries;
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
-import net.minecraft.util.registry.Registry;
 
 import net.fabricmc.loader.api.FabricLoader;
 
@@ -128,7 +129,7 @@ public class VorpalEnchantment extends Enchantment {
 					target.dropStack(stack);
 				} else {
 					//really ugly stuff starts here
-					String id = Registry.ENTITY_TYPE.getId(target.getType()).toString();
+					String id = Registries.ENTITY_TYPE.getId(target.getType()).toString();
 					JsonObject mobheadsObject;
 					try {
 						mobheadsObject = JsonParser.parseString(IOUtils.toString(Objects.requireNonNull(VorpalEnchantment.class.getResourceAsStream("/assets/vorpal-enchantment/mobheads.json")), StandardCharsets.UTF_8)).getAsJsonObject();
@@ -203,7 +204,7 @@ public class VorpalEnchantment extends Enchantment {
 	}
 
 	private static String modifyFrogKey(FrogEntity frogEntity) {
-		Identifier id = Registry.FROG_VARIANT.getId(frogEntity.getVariant());
+		Identifier id = Registries.FROG_VARIANT.getId(frogEntity.getVariant());
 		String frogType = Objects.requireNonNull(id).toString().substring(id.toString().indexOf(":" + 1));
 
 		return "minecraft:frog_" + frogType;
@@ -238,7 +239,7 @@ public class VorpalEnchantment extends Enchantment {
 			}
 		}
 
-		return "minecraft:rabbit" + rabbitEntity.getRabbitType();
+		return "minecraft:rabbit" + (rabbitEntity.getVariant().getId() == 99 ? 0 : rabbitEntity.getVariant().getId());
 	}
 
 	private static String modifyPandaKey(PandaEntity pandaEntity) {
@@ -247,11 +248,11 @@ public class VorpalEnchantment extends Enchantment {
 			return "minecraft:panda";
 		}
 
-		return "minecraft:panda_" + gene.getName();
+		return "minecraft:panda_" + gene.name().toLowerCase();
 	}
 
 	private static String modifyMooshroomKey(MooshroomEntity mooshroomEntity) {
-		return "minecraft:mooshroom_" + mooshroomEntity.getMooshroomType().name().toLowerCase(Locale.ROOT);
+		return "minecraft:mooshroom_" + mooshroomEntity.getVariant().name().toLowerCase(Locale.ROOT);
 	}
 
 	private static String modifyAxolotlKey(AxolotlEntity axolotlEntity) {
@@ -275,19 +276,19 @@ public class VorpalEnchantment extends Enchantment {
 	}
 
 	private static String modifyFoxKey(FoxEntity foxEntity) {
-		int id = foxEntity.getFoxType().getId();
+		int id = foxEntity.getVariant().getId();
 		return "minecraft:fox" + id;
 	}
 
 	private static String modifyCatKey(CatEntity catEntity) {
-		Identifier id = Registry.CAT_VARIANT.getId(catEntity.getVariant());
+		Identifier id = Registries.CAT_VARIANT.getId(catEntity.getVariant());
 		String catType = Objects.requireNonNull(id).toString().substring(id.toString().indexOf(":" + 1));
 
 		return "minecraft:cat_" + catType;
 	}
 
 	private static String modifyVillagerKey(VillagerEntity entity) {
-		return Registry.VILLAGER_PROFESSION.getId(entity.getVillagerData().getProfession()).toString();
+		return Registries.VILLAGER_PROFESSION.getId(entity.getVillagerData().getProfession()).toString();
 	}
 
 	private static String modifyZombieVillagerKey(ZombieVillagerEntity entity) {

@@ -7,6 +7,6 @@ import net.minecraft.entity.passive.HorseEntity;
 
 @Mixin(HorseEntity.class)
 public interface HorseEntityInvoker {
-	@Invoker("getVariant")
+	@Invoker("getHorseVariant")
 	int callGetVariant();
 }

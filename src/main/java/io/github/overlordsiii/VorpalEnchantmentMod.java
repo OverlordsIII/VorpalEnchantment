@@ -10,8 +10,9 @@ import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer;
 import net.minecraft.command.argument.serialize.ConstantArgumentSerializer;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.ArgumentTypeRegistry;
@@ -36,7 +37,7 @@ public class VorpalEnchantmentMod implements ModInitializer {
 
 		CONFIG = AutoConfig.getConfigHolder(VorpalConfig.class).getConfig();
 
-		Registry.register(Registry.ENCHANTMENT, new Identifier("vorpal_enchantment", "vorpal_enchantment"), new VorpalEnchantment(Enchantment.Rarity.RARE, new EquipmentSlot[]{EquipmentSlot.MAINHAND}));
+		Registry.register(Registries.ENCHANTMENT, new Identifier("vorpal_enchantment", "vorpal_enchantment"), new VorpalEnchantment(Enchantment.Rarity.RARE, new EquipmentSlot[]{EquipmentSlot.MAINHAND}));
 
 		ArgumentTypeRegistry.registerArgumentType(new Identifier("vorpal-enchantment", "chances"), ChancesArgumentType.class, ConstantArgumentSerializer.of(ChancesArgumentType::chances));
 		CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
