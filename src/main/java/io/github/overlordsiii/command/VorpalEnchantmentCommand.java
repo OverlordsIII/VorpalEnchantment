@@ -39,19 +39,19 @@ public class VorpalEnchantmentCommand {
 	}
 
 	private static int executeHelp(CommandContext<ServerCommandSource> ctx) {
-		ctx.getSource().sendFeedback(Text.translatable("commands.help.axes", VorpalEnchantmentMod.CONFIG.axeWielding).formatted(Formatting.GREEN), false);
-		ctx.getSource().sendFeedback(Text.translatable("commands.help.looting", VorpalEnchantmentMod.CONFIG.worksWithLooting).formatted(Formatting.GREEN), false);
-		ctx.getSource().sendFeedback(Text.translatable("commands.help.chance").formatted(Formatting.GREEN), false);
-		ctx.getSource().sendFeedback(Text.translatable("commands.help.chance.very_op").formatted(Formatting.GREEN), false);
-		ctx.getSource().sendFeedback(Text.translatable("commands.help.chance.slightly_op").formatted(Formatting.GREEN), false);
-		ctx.getSource().sendFeedback(Text.translatable("commands.help.chance.vanilla_friendly").formatted(Formatting.GREEN), false);
-		ctx.getSource().sendFeedback(Text.translatable("commands.help.chance.current", VorpalEnchantmentMod.CONFIG.chances.toString()).formatted(Formatting.GREEN), false);
+		ctx.getSource().sendFeedback(() -> Text.translatable("commands.help.axes", VorpalEnchantmentMod.CONFIG.axeWielding).formatted(Formatting.GREEN), false);
+		ctx.getSource().sendFeedback(() -> Text.translatable("commands.help.looting", VorpalEnchantmentMod.CONFIG.worksWithLooting).formatted(Formatting.GREEN), false);
+		ctx.getSource().sendFeedback(() -> Text.translatable("commands.help.chance").formatted(Formatting.GREEN), false);
+		ctx.getSource().sendFeedback(() -> Text.translatable("commands.help.chance.very_op").formatted(Formatting.GREEN), false);
+		ctx.getSource().sendFeedback(() -> Text.translatable("commands.help.chance.slightly_op").formatted(Formatting.GREEN), false);
+		ctx.getSource().sendFeedback(() -> Text.translatable("commands.help.chance.vanilla_friendly").formatted(Formatting.GREEN), false);
+		ctx.getSource().sendFeedback(() -> Text.translatable("commands.help.chance.current", VorpalEnchantmentMod.CONFIG.chances.toString()).formatted(Formatting.GREEN), false);
 
 		return 1;
 	}
 
 	private static int executeSetChance(CommandContext<ServerCommandSource> ctx, Chances chance, String displayText) {
-		ctx.getSource().sendFeedback(
+		ctx.getSource().sendFeedback(() ->
 			Text.translatable(displayText, chance.toString()).formatted(Formatting.YELLOW)
 				.styled(style -> style.withClickEvent(
 					new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND
@@ -80,7 +80,7 @@ public class VorpalEnchantmentCommand {
 		}
 		//      System.out.println("onOrOff = " + onOrOff);
 		ctx.getSource().sendFeedback(
-			Text.translatable(displayText, onOrOff).formatted(Formatting.YELLOW)
+			() -> Text.translatable(displayText, onOrOff).formatted(Formatting.YELLOW)
 				.styled(style -> style.withClickEvent(
 					new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND
 						, "/vorpal-enchantment toggle " + literal))
